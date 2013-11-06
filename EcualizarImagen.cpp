@@ -34,6 +34,9 @@ namespace FSIV
 
   Mat EcualizarImagen::ecualizar(const Mat &imagen, const Mat &mascara)
   {
+    assert((mascara.data == NULL) || (mascara.size() == imagen.size()));
+    assert((mascara.data == NULL) || (mascara.type() == imagen.type()));
+
     Mat matrizFinal(imagen.size(), imagen.type());
     static HistogramaAcumulado histograma;
 
