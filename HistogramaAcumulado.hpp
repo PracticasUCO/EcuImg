@@ -31,9 +31,6 @@ namespace FSIV
     /** @brief Normaliza el histograma **/
     void normalizar();
 
-    /** @brief Devuelve el numero del pixel que ocupa el porcentaje que se le pase**/
-    bool getPorcentaje(const unsigned int &canales, unsigned int &perc) const;
-
     inline ~HistogramaAcumulado()
     {
     }
