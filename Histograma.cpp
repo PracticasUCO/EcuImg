@@ -213,4 +213,18 @@ namespace FSIV
     assert(posicion < this->getTamanio());
     return _histograma[posicion];
   }
+
+  Histograma& operator =(const Histograma &h)
+  {
+    int minimo;
+    int maximo;
+    valarray<double> histograma;
+
+    minimo = h.getMinimo();
+    maximo = h.getMaximo();
+    histograma = h.getHistograma();
+
+    this->inicializar(minimo, maximo);
+    _histograma = histograma;
+  }
 };
