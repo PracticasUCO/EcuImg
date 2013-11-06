@@ -12,13 +12,9 @@ using namespace std; //Debug
 
 namespace FSIV
 {
-  EcualizarImagen::EcualizarImagen(unsigned int radio)
+  EcualizarImagen::EcualizarImagen(const unsigned int &radio)
   {
     this->setRadio(radio);
-  }
-
-  EcualizarImagen::EcualizarImagen(cv::Mat mascara, cv::Size size, unsigned int nCanales, unsigned int radio)
-  {
   }
 
   unsigned int EcualizarImagen::getRadio() const
@@ -31,17 +27,7 @@ namespace FSIV
     _radio = radio;
   }
 
-  cv::Size EcualizarImagen::getTamanioMascara() const
-  {
-    return _size;
-  }
-
-  Mat EcualizarImagen::ecualizacionCanalSinVentana(const Mat &matriz, const Mat &mascara, HistogramaAcumulado &histo)
-  {
-    return cv::Mat();
-  }
-
-  Mat EcualizarImagen::ecualizar(const Mat &imagen)
+  Mat EcualizarImagen::ecualizar(const Mat &imagen, const Mat &mascara)
   {
     return cv::Mat();
   }
