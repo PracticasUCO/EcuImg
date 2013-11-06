@@ -38,7 +38,7 @@ namespace FSIV
     void dimensionarHistograma();
 
     /** @brief Establece un valor a un determinado elemento **/
-    void setElemento(const unsigned int &canal, const unsigned int &posicion, const double &elemento);
+    void setElemento(const unsigned int &posicion, const double &elemento);
 
     /** @brief Incrementa el valor de una determinada posicion en uno **/
     void setElementoPlus(const unsigned int &canal, const unsigned int &posicion);
