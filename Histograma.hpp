@@ -41,7 +41,7 @@ namespace FSIV
     void setElemento(const unsigned int &posicion, const double &elemento);
 
     /** @brief Incrementa el valor de una determinada posicion en uno **/
-    void setElementoPlus(const unsigned int &canal, const unsigned int &posicion);
+    void setElementoPlus(const unsigned int &posicion);
 
     /** @brief Devuelve el ancho que deben de tener todos los numeros al mostrar el histograma por pantalla **/
     unsigned short int getAncho();
