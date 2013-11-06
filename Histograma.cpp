@@ -201,7 +201,7 @@ namespace FSIV
     return _histograma[posicion];
   }
 
-  Histograma& operator =(const Histograma &h)
+  Histograma& Histograma::operator =(const Histograma &h)
   {
     int minimo;
     int maximo;
@@ -213,5 +213,6 @@ namespace FSIV
 
     this->inicializar(minimo, maximo);
     _histograma = histograma;
+    return *this;
   }
 };
