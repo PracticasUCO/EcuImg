@@ -94,6 +94,40 @@ namespace FSIV
     _histograma = 0;
   }
 
+  void Histograma::procesarDatos(const Mat &m, const Mat &mascara)
+  {
+    assert((mascara.data == NULL) || (mascara.size() == m.size()));
+    assert((mascara.data == NULL) || (mascara.type() == m.type()));
+
+    valarray<Mat> canalesMatriz;
+    valarray<Mat> canalesMascara;
+
+    split(m, canalesMatriz);
+    split(mascara, canalesMascara);
+
+    for(unsigned int ch = 0; ch < canalesMatriz.size(); ch++)
+      {
+	canalesMatriz[ch].converTo(canalesMatriz[ch], CV_8UC1);
+       
+	if(mascara.data != NULL)
+	  {
+	    canalesMascara[ch].converTo(canalesMatriz[ch], CV_8UC1);
+	  }
+
+	for(int i = 0; i < canalesMatriz[ch].size(); i++)
+	  {
+	    for(int j = 0; j < canalesMatriz[ch].size(); j++)
+	      {
+		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 255))
+		  {
+		    unsigned int valorLeido = static_cast<unsigned int>(canalesMatriz[ch].at<unsigned int>(i, j));
+		    this->setElementoPlus(valorLeido);
+		  }
+	      }
+	  }
+      }
+  }
+
   void Histograma::normalizar()
   {
     _histograma /= _histograma.sum();
