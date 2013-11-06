@@ -99,7 +99,7 @@ namespace FSIV
     _histograma /= _histograma.sum();
   }
 
-  void Histograma::mostrarHistograma()
+  void Histograma::mostrar()
   {
     unsigned short int ancho = this->getAncho();
     for(unsigned int i = 0; i < _histograma.size(); i++)
@@ -170,7 +170,7 @@ namespace FSIV
 
   ostream& operator <<(ostream &output, Histograma &h)
   {
-    h.mostrarHistograma();
+    h.mostrar();
     return output;
   }
 
