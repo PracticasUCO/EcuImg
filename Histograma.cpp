@@ -70,14 +70,7 @@ namespace FSIV
 
   int Histograma::getMaximo() const
   {
-  }
-
-  unsigned int Histograma::getAmplitud() const
-  {
-  }
-
-  unsigned int Histograma::getCanales() const
-  {
+    return _maximo;
   }
 
   vector<double> Histograma::getHistograma() const
