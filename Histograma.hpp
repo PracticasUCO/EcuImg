@@ -4,6 +4,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <vector>
+#include <valarray>
 
 using namespace std;
 using namespace cv;

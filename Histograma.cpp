@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include <iomanip>
+#include <valarray>
 #include "Histograma.hpp"
 
 using namespace std;
@@ -30,7 +31,7 @@ namespace FSIV
   {
     _minimo = minimo;
 
-    if(maximo < minimo)
+    if(_maximo < minimo)
       {
 	this->setMaximo(minimo + 1);
       }
@@ -40,7 +41,7 @@ namespace FSIV
   {
     _maximo = maximo;
 
-    if(minimo > maximo)
+    if(_minimo > maximo)
       {
 	this->setMinimo(maximo - 1);
       }

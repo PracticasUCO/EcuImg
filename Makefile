@@ -3,9 +3,12 @@
 CXX = g++
 INCLUDE = -I.
 OPENCV = `pkg-config --cflags --libs opencv`
-CXXFLAGS = $(INCLUDE) -Wall -ggdb3 -lm $(OPENCV)
+CXXFLAGS = $(INCLUDE) -Wall -ggdb3 -std=c++11 -lm $(OPENCV)
 
 ecuImg: EcualizarImagen.o HistogramaAcumulado.o Histograma.o main.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+test: Histograma.o HistogramaAcumulado.o test.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 EcualizarImagen.o: EcualizarImagen.cpp EcualizarImagen.hpp Histograma.o HistogramaAcumulado.o
