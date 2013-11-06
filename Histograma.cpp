@@ -108,11 +108,11 @@ namespace FSIV
 
     for(unsigned int ch = 0; ch < canalesMatriz.size(); ch++)
       {
-	canalesMatriz[ch].converTo(canalesMatriz[ch], CV_8UC1);
+	canalesMatriz[ch].convertTo(canalesMatriz[ch], CV_8UC1);
        
 	if(mascara.data != NULL)
 	  {
-	    canalesMascara[ch].converTo(canalesMatriz[ch], CV_8UC1);
+	    canalesMascara[ch].convertTo(canalesMatriz[ch], CV_8UC1);
 	  }
 
 	for(int i = 0; i < canalesMatriz[ch].size(); i++)
