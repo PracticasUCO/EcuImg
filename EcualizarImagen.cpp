@@ -12,8 +12,9 @@ using namespace std; //Debug
 
 namespace FSIV
 {
-  EcualizarImagen::EcualizarImagen()
+  EcualizarImagen::EcualizarImagen(unsigned int radio)
   {
+    radio = _radio;
   }
 
   EcualizarImagen::EcualizarImagen(cv::Mat mascara, cv::Size size, unsigned int nCanales, unsigned int radio)
