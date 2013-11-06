@@ -27,6 +27,7 @@ namespace FSIV
 
   void HistogramaAcumulado::normalizar()
   {
+    _histograma /= _histograma[_histograma.size() - 1];
   }
 
   bool HistogramaAcumulado::getPorcentaje(const unsigned int &canal, unsigned int &perc) const
