@@ -71,8 +71,12 @@ namespace FSIV
 	  }
 	else
 	  {
-	    
+	    cout << "Aun no implementada la ecualizacion monocroma sin ventanas" << endl;
 	  }
+      }
+    else
+      {
+	cout << "Aun no implementada la ecualizacion cromatica" << endl;
       }
 
     return matrizFinal;
