@@ -81,4 +81,39 @@ namespace FSIV
 
     return matrizFinal;
   }
+
+  void EcualizarImagen::rellenarBordes(const Mat &imagen, Mat &imagenFinal)
+  {
+    for(unsigned int i = 0; i < this->getRadio(); i++)
+      {
+	for(unsigned int j = 0; j < static_cast<unsigned int>(imagen.cols); j++)
+	  {
+	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+	  }
+      }
+
+    for(unsigned int i = static_cast<unsigned int>(imagen.rows) - this->getRadio(); i < static_cast<unsigned int>(imagen.rows); i++)
+      {
+	for(unsigned int j = 0; j < static_cast<unsigned int>(imagen.cols); j++)
+	  {
+	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+	  }
+      }
+
+    for(unsigned int i = this->getRadio(); i < static_cast<unsigned int>(imagen.rows) - this->getRadio(); i++)
+      {
+	for(unsigned int j = 0; j < static_cast<unsigned int>(this->getRadio()); j++)
+	  {
+	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+	  }
+      }
+
+    for(unsigned int i = this->getRadio(); i < static_cast<unsigned int>(imagen.rows) - this->getRadio(); i++)
+      {
+	for(unsigned int j = static_cast<unsigned int>(imagen.cols) - this->getRadio(); j < static_cast<unsigned int>(imagen.cols); j++)
+	  {
+	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+	  }
+      }
+  }
 }
