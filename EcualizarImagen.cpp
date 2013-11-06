@@ -50,11 +50,16 @@ namespace FSIV
 		  {
 		    Mat ventana(imagen, Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
 		    Mat ventanaMascara;
+		    bool permitirPaso = true;
 
-		    if((mascara.data != NULL) || (mascara.at<unsigned char>(i, j) != 255))
+		    if(mascara.data != NULL)
 		      {
 			ventanaMascara = mascara(Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
-		      
+			permitirPaso = mascara.at<unsigned char>(i, j) != 255;
+		      }
+
+		    if(permitirPaso)
+		      {
 			unsigned char centroVentana = imagen.at<unsigned char>(i, j);
 			unsigned char nuevoValor;
 
@@ -63,12 +68,8 @@ namespace FSIV
 			histograma.normalizar();
 		    
 			nuevoValor = static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
-		    
+			
 			matrizFinal.at<unsigned char>(i, j) = nuevoValor;
-		      }
-		    else
-		      {
-			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
 		      }
 		    ventana.release();
 		  }
