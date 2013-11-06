@@ -154,17 +154,9 @@ namespace FSIV
   {
     if(this->comprobarAncho())
       {
-	unsigned int maximo = 0;
 	unsigned int width = 1;
-	
-	for(unsigned int m = 0; m < this->getTamanioComprimido(); m++)
-	  {
-	    if(this->getElemento(ch, m) > maximo)
-	      {
-		maximo = this->getElemento(m);
-	      }
-	  }
-	
+	unsigned int maximo = _histograma.max();
+
 	if(maximo < 0)
 	  {
 	    maximo *= -1;
