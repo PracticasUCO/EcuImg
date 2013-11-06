@@ -33,11 +33,6 @@ namespace FSIV
      **/
     void setMaximo(const int &maximo);
 
-    /** @brief Establece la amplitud entre valores del histograma
-	@param amplitud. Amplitud del histograma
-    **/
-    void setAmplitud(const unsigned int &amplitud);
-
     /** @brief Redimensiona el vector al tamaño adecuado
      **/
     void dimensionarHistograma();

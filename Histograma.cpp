@@ -45,13 +45,9 @@ namespace FSIV
       }
   }
 
-  void Histograma::setAmplitud(const unsigned int &amplitud)
-  {
-    _amplitud = amplitud;
-  }
-
   void Histograma::dimensionarHistograma()
   {
+    
   }
 
   void Histograma::setElemento(const unsigned int &canal, const unsigned int &posicion, const double &elemento)
