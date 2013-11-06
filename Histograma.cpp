@@ -48,7 +48,7 @@ namespace FSIV
 
   void Histograma::dimensionarHistograma()
   {
-    _histograma.resize(this->getMaximo() - this->getMinimo(), 0);
+    _histograma.resize(this->getMaximo() - this->getMinimo() + 1, 0);
   }
 
   void Histograma::setElemento(const unsigned int &posicion, const double &elemento)
@@ -101,6 +101,18 @@ namespace FSIV
 
   void Histograma::mostrarHistograma()
   {
+    unsigned short int ancho = this->getAncho();
+    for(unsigned int i = 0; i < _histograma.size(); i++)
+      {
+	cout << setw(ancho) <<_histograma[i];
+      }
+    cout << endl;
+
+    for(unsigned int i = 0; i < _histograma.size(); i++)
+      {
+	cout << setw(ancho) << i;
+      }
+    cout << endl;
   }
 
   unsigned short int Histograma::getAncho()
