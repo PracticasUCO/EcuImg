@@ -24,8 +24,8 @@ namespace FSIV
 
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
-    EcualizarImagen();
-
+    EcualizarImagen(unsigned int radio = 0);
+    
     /** @brief Inicializa la clase con la mascara **/
     EcualizarImagen(cv::Mat mascara, cv::Size size, unsigned int nCanales = 1, unsigned int radio = 0);
 
