@@ -44,21 +44,33 @@ namespace FSIV
       {
 	if(this->hayVentanas()) //Ecualizacion por ventanas
 	  {
-	    for(int i = this->getRadio(); i < matrizFinal.rows - static_cast<int>(this->getRadio()); i++)
+	    for(int i = this->getRadio(); i < matrizFinal.rows - static_cast<int>(this->getRadio()) - 1; i++)
 	      {
-		for(int j = this->getRadio(); j < matrizFinal.cols - static_cast<int>(this->getRadio()); j++)
+		for(int j = this->getRadio(); j < matrizFinal.cols - static_cast<int>(this->getRadio()) - 1; j++)
 		  {
 		    Mat ventana(imagen, Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
-		    unsigned char centroVentana = ventana.at<unsigned char>(i, j);
-		    unsigned char nuevoValor;
+		    Mat ventanaMascara;
 
-		    histograma.clear();
-		    histograma.procesarDatos(ventana, mascara);
-		    histograma.normalizar();
+		    if((mascara.data != NULL) || (mascara.at<unsigned char>(i, j) != 255))
+		      {
+			ventanaMascara = mascara(Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
+		      
+			unsigned char centroVentana = imagen.at<unsigned char>(i, j);
+			unsigned char nuevoValor;
+
+			histograma.clear();
+			histograma.procesarDatos(ventana, ventanaMascara);
+			histograma.normalizar();
 		    
-		    nuevoValor = static_cast<unsigned char>(histograma[centroVentana]);
+			nuevoValor = static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
 		    
-		    matrizFinal.at<unsigned char>(i, j) = nuevoValor;
+			matrizFinal.at<unsigned char>(i, j) = nuevoValor;
+		      }
+		    else
+		      {
+			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+		      }
+		    ventana.release();
 		  }
 	      }
 
