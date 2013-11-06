@@ -78,11 +78,6 @@ namespace FSIV
     **/
     int getMaximo() const;
 
-    /** @brief Devuelve la amplitud del histograma
-	@return Amplitud entre pixel y pixel
-    **/
-    unsigned int getAmplitud() const;
-
     /** @brief Devuelve el histograma, tal y como esta almacenado, sin ningun tipo de procesamiento extra.
 	@return Histograma en crudo.
     **/
