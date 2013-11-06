@@ -121,7 +121,7 @@ namespace FSIV
 	      {
 		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 255))
 		  {
-		    unsigned int valorLeido = static_cast<unsigned int>(canalesMatriz[ch].at<unsigned int>(i, j));
+		    unsigned int valorLeido = static_cast<unsigned int>(canalesMatriz[ch].at<unsigned char>(i, j));
 		    this->setElementoPlus(valorLeido);
 		  }
 	      }
