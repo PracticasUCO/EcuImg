@@ -141,13 +141,13 @@ namespace FSIV
 
     for(unsigned int i = 0; i < _histograma.size(); i++)
       {
-	cout << setw(ancho + 3) <<_histograma[i];
+	cout << setprecision(2) << setw(ancho + 5) <<_histograma[i];
       }
     cout << endl;
 
     for(unsigned int i = 0; i < _histograma.size(); i++)
       {
-	cout << setw(ancho + 3) << i;
+	cout << setw(ancho + 5) << i;
       }
     cout << endl;
   }
