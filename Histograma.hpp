@@ -17,7 +17,7 @@ namespace FSIV
   class Histograma
   {
   protected:
-    vector<double> _histograma; //!< Vector del histograma
+    valarray<double> _histograma; //!< Vector del histograma
     int _minimo; //!< Valor más pequenio que almacenara el histograma
     int _maximo; //!< Valor mas grande que almacenara el histograma
     unsigned short int _ancho; //!< Ancho minimo de salida de cada numero estandar (para la funcion mostrarHistograma

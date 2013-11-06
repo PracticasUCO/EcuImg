@@ -10,18 +10,29 @@ namespace FSIV
 {
   Histograma::Histograma(const int &minimo, const int &maximo)
   {
+    this->inicializar(minimo, maximo);
   }
 
   Histograma::Histograma(const Histograma &h)
   {
+    *this = h;
   }
 
   void Histograma::inicializar(const int &minimo, const int &maximo)
   {
+    assert(minimo < maximo);
+    this->setMinimo(minimo);
+    this->setMaximo(maximo);
   }
 
   void Histograma::setMinimo(const int &minimo)
   {
+    _minimo = minimo;
+
+    if(maximo < minimo)
+      {
+	this->setMaximo(minimo + 1);
+      }
   }
 
   void Histograma::setMaximo(const int &maximo)
