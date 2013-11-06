@@ -176,5 +176,7 @@ namespace FSIV
 
   double Histograma::operator [](const unsigned int &posicion)
   {
+    assert(posicion < this->getTamanio());
+    return _histograma[posicion];
   }
 };
