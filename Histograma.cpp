@@ -58,7 +58,7 @@ namespace FSIV
     _histograma[posicion] = elemento;
   }
 
-  void Histograma::setElementoPlus(const unsigned int &canal, const unsigned int &posicion)
+  void Histograma::setElementoPlus(const unsigned int &posicion)
   {
     assert(posicion < this->getTamanio());
     _histograma[posicion] = _histograma[posicion] + 1;
