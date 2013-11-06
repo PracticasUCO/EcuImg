@@ -115,9 +115,9 @@ namespace FSIV
 	    canalesMascara[ch].convertTo(canalesMatriz[ch], CV_8UC1);
 	  }
 
-	for(int i = 0; i < canalesMatriz[ch].size(); i++)
+	for(int i = 0; i < canalesMatriz[ch].rows; i++)
 	  {
-	    for(int j = 0; j < canalesMatriz[ch].size(); j++)
+	    for(int j = 0; j < canalesMatriz[ch].cols; j++)
 	      {
 		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 255))
 		  {
