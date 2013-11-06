@@ -170,6 +170,8 @@ namespace FSIV
 
   ostream& operator <<(ostream &output, Histograma &h)
   {
+    h.mostrarHistograma();
+    return output;
   }
 
   double Histograma::operator [](const unsigned int &posicion)
