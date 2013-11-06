@@ -80,7 +80,7 @@ namespace FSIV
 
   unsigned int Histograma::getTamanio() const
   {
-    return this->getMaximo() - this->getMinimo() + 1;
+    return static_cast<unsigned int>(this->getMaximo() - this->getMinimo() + 1);
   }
 
   double Histograma::getElemento(const unsigned int &x) const
