@@ -17,6 +17,9 @@ namespace FSIV
   private:
     unsigned int _radio; //!< Radio de la ventana que ecualizara la imagen
 
+    /** @brief Rellena los bordes de una imagen **/
+    void rellenarBordes(const Mat &imagen, Mat &imagenFinal);
+
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
     EcualizarImagen(const unsigned int &radio = 0);
