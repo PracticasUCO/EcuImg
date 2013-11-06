@@ -27,6 +27,11 @@ namespace FSIV
     _radio = radio;
   }
 
+  bool EcualizarImagen::hayVentanas()
+  {
+    return this->getRadio() != 0;
+  }
+
   Mat EcualizarImagen::ecualizar(const Mat &imagen, const Mat &mascara)
   {
     return cv::Mat();

@@ -30,6 +30,11 @@ namespace FSIV
 	@param radio Nuevo radio de la mascara.**/
     void setRadio(const unsigned int &radio);
 
+    /** @brief Indica si es posible la ecualizacion por ventanas
+	@return TRUE si es posible ecualizar por ventanas, y FALSE en caso contrario
+    **/
+    bool hayVentanas();
+
     /** @brief Realiza la ecualización de la imagen
 	@param imagen -->La imagen a ser ecualizada
 	@pre Si se inicializo una mascara, deben de coincidir
