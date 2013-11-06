@@ -154,20 +154,14 @@ namespace FSIV
   {
     if(this->comprobarAncho())
       {
-	unsigned int canales;
 	unsigned int maximo = 0;
 	unsigned int width = 1;
 	
-	canales = this->getCanales();
-	
-	for(unsigned int ch = 0; ch < canales; ch++)
+	for(unsigned int m = 0; m < this->getTamanioComprimido(); m++)
 	  {
-	    for(unsigned int m = 0; m < this->getTamanioComprimido(); m++)
+	    if(this->getElemento(ch, m) > maximo)
 	      {
-		if(this->getElemento(ch, m) > maximo)
-		  {
-		    maximo = this->getElemento(ch, m);
-		  }
+		maximo = this->getElemento(m);
 	      }
 	  }
 	
