@@ -23,6 +23,7 @@ namespace FSIV
     assert(minimo < maximo);
     this->setMinimo(minimo);
     this->setMaximo(maximo);
+    this->dimensionarHistograma();
   }
 
   void Histograma::setMinimo(const int &minimo)
@@ -47,7 +48,7 @@ namespace FSIV
 
   void Histograma::dimensionarHistograma()
   {
-    
+    _histograma.resize(this->getMaximo() - this->getMinimo(), 0);
   }
 
   void Histograma::setElemento(const unsigned int &canal, const unsigned int &posicion, const double &elemento)
