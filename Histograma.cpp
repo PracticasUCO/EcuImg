@@ -25,6 +25,7 @@ namespace FSIV
     this->setMinimo(minimo);
     this->setMaximo(maximo);
     this->dimensionarHistograma();
+    _ancho = 0;
   }
 
   void Histograma::setMinimo(const int &minimo)
@@ -137,6 +138,7 @@ namespace FSIV
   void Histograma::mostrar()
   {
     unsigned short int ancho = this->getAncho();
+
     for(unsigned int i = 0; i < _histograma.size(); i++)
       {
 	cout << setw(ancho) <<_histograma[i];
@@ -154,7 +156,7 @@ namespace FSIV
   {
     if(this->comprobarAncho())
       {
-	unsigned int width = 1;
+	unsigned short int width = 1;
 	unsigned int maximo = _histograma.max();
 
 	if(maximo < 0)
@@ -167,7 +169,7 @@ namespace FSIV
 	    maximo /= 10;
 	    width++;
 	  }
-	
+
 	if(width > _ancho)
 	  {
 	    _ancho = width;
