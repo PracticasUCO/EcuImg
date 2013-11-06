@@ -71,6 +71,10 @@ namespace FSIV
 			
 			matrizFinal.at<unsigned char>(i, j) = nuevoValor;
 		      }
+		    else //Si no procesa el pixel, que copie al menos su valor original a la matriz de salida
+		      {
+			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+		      }
 		    ventana.release();
 		  }
 	      }
