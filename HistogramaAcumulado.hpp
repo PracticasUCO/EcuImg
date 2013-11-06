@@ -24,7 +24,7 @@ namespace FSIV
     }
 
     /** @brief Procesa los datos **/
-    void procesarDatos(const Mat &m, const Mat &mascara);
+    void procesarDatos(const Mat &m, const Mat &mascara = cv::Mat());
 
     /** @brief Busca el indice que coincida con un determinador valor **/
     unsigned int buscarValor(const double &v);

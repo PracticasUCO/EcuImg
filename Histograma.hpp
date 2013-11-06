@@ -101,7 +101,7 @@ namespace FSIV
 	@param m. La matriz a procesar
 	@pre Los valores de dicha matriz deben de estar entre el valor maximo y el minimo establecidos
     **/
-    void procesarDatos(const Mat &m, const Mat &mascara);
+    void procesarDatos(const Mat &m, const Mat &mascara = cv::Mat());
 
     /** @Normaliza el programa, para que la suma de todos sus componentes valga uno **/
     void normalizar();
