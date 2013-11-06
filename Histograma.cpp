@@ -73,8 +73,9 @@ namespace FSIV
     return _maximo;
   }
 
-  vector<double> Histograma::getHistograma() const
+  valarray<double> Histograma::getHistograma() const
   {
+    return _histograma;
   }
 
   unsigned int Histograma::getTamanio() const

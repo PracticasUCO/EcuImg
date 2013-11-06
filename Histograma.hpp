@@ -81,7 +81,7 @@ namespace FSIV
     /** @brief Devuelve el histograma, tal y como esta almacenado, sin ningun tipo de procesamiento extra.
 	@return Histograma en crudo.
     **/
-    vector<double> getHistograma() const;
+    valarray<double> getHistograma() const;
 
     /** @brief Devuelve el tamaño del histograma
 	@return Tamañio del histograma
