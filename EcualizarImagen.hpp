@@ -15,19 +15,13 @@ namespace FSIV
   class EcualizarImagen
   {
   private:
-    cv::Mat _mask;
-    cv::Size _size;
-    unsigned int _canales;
-    unsigned int _radio; //!< Radio final de la mascara de procesamiento
+    unsigned int _radio;
 
     Mat ecualizacionCanalSinVentana(const Mat &matriz, const Mat &mascara, HistogramaAcumulado &histo);
 
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
     EcualizarImagen(unsigned int radio = 0);
-    
-    /** @brief Inicializa la clase con la mascara **/
-    EcualizarImagen(cv::Mat mascara, cv::Size size, unsigned int nCanales = 1, unsigned int radio = 0);
 
     /** @brief Devuelve el radio asignado
 	@return Radio de la mascara. 
@@ -46,7 +40,7 @@ namespace FSIV
 	@pre Si se inicializo una mascara, deben de coincidir
 	@return Una imagen ecualizada
     **/
-    Mat ecualizar(const Mat &imagen);
+    Mat ecualizar(const Mat &imagen, const Mat &mascara = cv::Mat());
   };
 };
 

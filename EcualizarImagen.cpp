@@ -14,7 +14,7 @@ namespace FSIV
 {
   EcualizarImagen::EcualizarImagen(unsigned int radio)
   {
-    radio = _radio;
+    this->setRadio(radio);
   }
 
   EcualizarImagen::EcualizarImagen(cv::Mat mascara, cv::Size size, unsigned int nCanales, unsigned int radio)
