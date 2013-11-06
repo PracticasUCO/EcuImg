@@ -65,6 +65,7 @@ namespace FSIV
 
   int Histograma::getMinimo() const
   {
+    return _minimo;
   }
 
   int Histograma::getMaximo() const
