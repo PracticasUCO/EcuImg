@@ -37,6 +37,12 @@ namespace FSIV
 
   void Histograma::setMaximo(const int &maximo)
   {
+    _maximo = maximo;
+
+    if(minimo > maximo)
+      {
+	this->setMinimo(maximo - 1);
+      }
   }
 
   void Histograma::setAmplitud(const unsigned int &amplitud)
