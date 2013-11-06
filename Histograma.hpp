@@ -90,7 +90,7 @@ namespace FSIV
 
     /** @brief Devuelve el elemento n-esimo del histograma
      **/
-    double getElemento(const unsigned int &canal, const unsigned int &x) const;
+    double getElemento(const unsigned int &x) const;
 
     /** @brief Borra el histograma
      **/

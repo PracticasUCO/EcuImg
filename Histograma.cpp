@@ -83,12 +83,15 @@ namespace FSIV
     return this->getMaximo() - this->getMinimo() + 1;
   }
 
-  double Histograma::getElemento(const unsigned int &canal, const unsigned int &x) const
+  double Histograma::getElemento(const unsigned int &x) const
   {
+    assert(x < this->getTamanio());
+    return _histograma[x];
   }
 
   void Histograma::clear()
   {
+    _histograma = 0;
   }
 
   void Histograma::normalizar()
