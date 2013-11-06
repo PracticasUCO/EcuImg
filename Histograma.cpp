@@ -100,8 +100,8 @@ namespace FSIV
     assert((mascara.data == NULL) || (mascara.size() == m.size()));
     assert((mascara.data == NULL) || (mascara.type() == m.type()));
 
-    valarray<Mat> canalesMatriz;
-    valarray<Mat> canalesMascara;
+    vector<Mat> canalesMatriz;
+    vector<Mat> canalesMascara;
 
     split(m, canalesMatriz);
     split(mascara, canalesMascara);
