@@ -29,4 +29,16 @@ namespace FSIV
   {
     _histograma /= _histograma[_histograma.size() - 1];
   }
+
+  unsigned int HistogramaAcumulado::buscarValor(const double &v)
+  {
+    for(unsigned int i = 0; i < this->getTamanio(); i++)
+      {
+	if(this->getElemento(i) >= v)
+	  {
+	    return i;
+	  }
+      }
+    return this->getMaximo();
+  }
 };
