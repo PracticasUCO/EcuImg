@@ -96,6 +96,7 @@ namespace FSIV
 
   void Histograma::normalizar()
   {
+    _histograma /= _histograma.sum();
   }
 
   void Histograma::mostrarHistograma()
