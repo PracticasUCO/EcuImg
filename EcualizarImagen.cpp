@@ -12,19 +12,6 @@ using namespace std; //Debug
 
 namespace FSIV
 {
-  unsigned char EcualizarImagen::ecualizarPorVentana(const Mat &ventanaImagen, const Mat &ventanaMascara = cv::Mat())
-  {
-    HistogramaAcumulado histograma;
-    unsigned char centroVentana;
-    
-    histograma.procesarDatos(ventanaImagen, ventanaMascara);
-    histograma.normalizar();
-
-    centroVentana = ventanaImagen.at<unsigned char>(this->getRadio() / 2, this->getRadio() / 2);
-
-    return static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
-  }
-
   EcualizarImagen::EcualizarImagen(const unsigned int &radio)
   {
     this->setRadio(radio);
@@ -65,7 +52,7 @@ namespace FSIV
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
-		    if(mascara.data != NULL)
+		    if(!mascara.empty())
 		      {
 			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
