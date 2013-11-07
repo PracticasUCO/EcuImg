@@ -55,7 +55,7 @@ namespace FSIV
 		    if(mascara.data != NULL)
 		      {
 			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
-			permitirPaso = mascara.at<unsigned char>(i, j) != 255;
+			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
 		    if(permitirPaso)
@@ -96,7 +96,7 @@ namespace FSIV
 	      {
 		for(int j = 0; j < matrizFinal.cols; j++)
 		  {
-		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 255))
+		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 0))
 		      {
 			unsigned char valorLeido = imagen.at<unsigned char>(i, j);
 			matrizFinal.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
