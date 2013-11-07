@@ -44,17 +44,18 @@ namespace FSIV
       {
 	if(this->hayVentanas()) //Ecualizacion por ventanas
 	  {
-	    for(int i = this->getRadio(); i < imagen.rows - static_cast<int>(this->getRadio()); i++)
+	    int radio = static_cast<int>(this->getRadio());
+	    for(int i = radio; i < imagen.rows - radio; i++)
 	      {
-		for(int j = this->getRadio(); j < imagen.cols - static_cast<int>(this->getRadio()); j++)
+		for(int j = radio; j < imagen.cols - radio; j++)
 		  {
-		    Mat ventana(imagen, Rect(j - this->getRadio(), i - this->getRadio(), this->getRadio()*2 + 1, this->getRadio() * 2 + 1));
+		    Mat ventana(imagen, Rect(j - radio, i - radio, radio * 2 + 1, radio * 2 + 1));
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
 		    if(!mascara.empty())
 		      {
-			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
+			ventanaMascara = mascara(Rect(j - radio, i - radio, 2 * radio + 1, 2 * radio + 1));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
@@ -120,19 +121,20 @@ namespace FSIV
 
 	if(this->hayVentanas()) //Ecualizacion cromatica por ventanas
 	  {
-	    for(int i = this->getRadio(); i < canales[ILUMINACION].rows - static_cast<int>(this->getRadio()); i++)
+	    int radio = static_cast<int>(this->getRadio());
+	    for(int i = radio; i < canales[ILUMINACION].rows - radio; i++)
 	      {
-		for(int j = this->getRadio(); i < canales[ILUMINACION].cols - static_cast<int>(this->getRadio()); j++)
+		for(int j = radio; i < canales[ILUMINACION].cols - radio; j++)
 		  {
-		    int altura = (2*this->getRadio()) + 1;
-		    Mat ventana(canales[ILUMINACION], Rect(j - this->getRadio(), i - this->getRadio(), altura, altura));
+		    int altura = (2 * radio) + 1;
+		    Mat ventana(canales[ILUMINACION], Rect(j - radio, i - radio, altura, altura));
 		    
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
 		    if(!mascara.empty())
 		      {
-			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), altura, altura));
+			ventanaMascara = mascara(Rect(j - radio, i - radio, altura, altura));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
