@@ -124,7 +124,7 @@ namespace FSIV
 	    int radio = static_cast<int>(this->getRadio());
 	    for(int i = radio; i < canales[ILUMINACION].rows - radio; i++)
 	      {
-		for(int j = radio; i < canales[ILUMINACION].cols - radio; j++)
+		for(int j = radio; j < canales[ILUMINACION].cols - radio; j++)
 		  {
 		    int altura = (2 * radio) + 1;
 		    Mat ventana(canales[ILUMINACION], Rect(j - radio, i - radio, altura, altura));
