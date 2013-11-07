@@ -120,7 +120,7 @@ namespace FSIV
 	  {
 	    for(int j = 0; j < canalesMatriz[ch].cols; j++)
 	      {
-		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 255))
+		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 0))
 		  {
 		    unsigned int valorLeido = static_cast<unsigned int>(canalesMatriz[ch].at<unsigned char>(i, j));
 		    this->setElementoPlus(valorLeido);
