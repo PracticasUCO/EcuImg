@@ -109,20 +109,22 @@ namespace FSIV
 
     for(unsigned int ch = 0; ch < canalesMatriz.size(); ch++)
       {
-	canalesMatriz[ch].convertTo(canalesMatriz[ch], CV_8UC1);
+	Mat matriz;
+	Mat mas;
+	canalesMatriz[ch].convertTo(matriz, CV_8UC1);
        
 	if(mascara.data != NULL)
 	  {
-	    canalesMascara[ch].convertTo(canalesMatriz[ch], CV_8UC1);
+	    canalesMascara[ch].convertTo(mas, CV_8UC1);
 	  }
 
-	for(int i = 0; i < canalesMatriz[ch].rows; i++)
+	for(int i = 0; i < matriz.rows; i++)
 	  {
-	    for(int j = 0; j < canalesMatriz[ch].cols; j++)
+	    for(int j = 0; j < matriz.cols; j++)
 	      {
-		if((mascara.data == NULL) || (canalesMascara[ch].at<unsigned char>(i, j) != 0))
+		if((mas.empty()) || (mas.at<unsigned char>(i, j) != 0))
 		  {
-		    unsigned int valorLeido = static_cast<unsigned int>(canalesMatriz[ch].at<unsigned char>(i, j));
+		    unsigned int valorLeido = static_cast<unsigned int>(matriz.at<unsigned char>(i, j));
 		    this->setElementoPlus(valorLeido);
 		  }
 	      }
