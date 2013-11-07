@@ -88,7 +88,21 @@ namespace FSIV
 	  }
 	else
 	  {
-	    cout << "Aun no implementada la ecualizacion monocroma sin ventanas" << endl;
+	    histograma.clear();
+	    histograma.procesarDatos(imagen, mascara);
+	    histograma.normalizar();
+	    
+	    for(int i = 0; i < matrizFinal.rows; i++)
+	      {
+		for(int j = 0; j < matrizFinal.cols; j++)
+		  {
+		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 255))
+		      {
+			unsigned char valorLeido = imagen.at<unsigned char>(i, j);
+			matrizFinal.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
+		      }
+		  }
+	      }
 	  }
       }
     else
