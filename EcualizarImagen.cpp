@@ -161,6 +161,27 @@ namespace FSIV
 	  }
 	else
 	  {
+	    histograma.clear();
+	    histograma.procesarDatos(canales[ILUMINACION], mascara);
+	    histograma.normalizar();
+
+	    for(int i = 0; i < canalIluminacion.rows; i++)
+	      {
+		for(int j = 0; j < canalIluminacion.cols; j++)
+		  {
+		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 0))
+		      {
+			unsigned char valorLeido = canales[ILUMINACION].at<unsigned char>(i, j);
+			canalIluminacion.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
+		      }
+		    else
+		      {
+			canalIluminacion.at<unsigned char>(i, j) = canales[ILUMINACION].at<unsigned char>(i, j);
+		      }
+		  }
+	      }
+	    canales[ILUMINACION] = canalIluminacion.clone();
+	    merge(canales, matrizFinal);
 	  }
 	cvtColor(matrizFinal, matrizFinal, CV_HSV2BGR);
       }
