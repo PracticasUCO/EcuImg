@@ -38,25 +38,24 @@ namespace FSIV
     assert((mascara.data == NULL) || (mascara.type() == imagen.type()));
 
     Mat matrizFinal(imagen.size(), imagen.type());
+    matrizFinal = matrizFinal.zeros(matrizFinal.size(), matrizFinal.type());
     static HistogramaAcumulado histograma;
 
     if(matrizFinal.channels() == 1) //Imagen monocroma
       {
 	if(this->hayVentanas()) //Ecualizacion por ventanas
 	  {
-	    for(int i = this->getRadio(); i < imagen.rows - static_cast<int>(this->getRadio()) - 1; i++)
+	    for(int i = this->getRadio(); i < imagen.rows - static_cast<int>(this->getRadio()); i++)
 	      {
-		for(int j = this->getRadio(); j < imagen.cols - static_cast<int>(this->getRadio()) - 1; j++)
+		for(int j = this->getRadio(); j < imagen.cols - static_cast<int>(this->getRadio()); j++)
 		  {
-		    Mat ventana(imagen, Range(i - this->getRadio(), i + this->getRadio() + 1), 
-				Range(j - this->getRadio(), j + this->getRadio() + 1));
+		    Mat ventana(imagen, Rect(j - this->getRadio(), i - this->getRadio(), this->getRadio()*2 + 1, this->getRadio() * 2 + 1));
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
 		    if(mascara.data != NULL)
 		      {
-			ventanaMascara = imagen(Range(i - this->getRadio(), i + this->getRadio() + 1), 
-						Range(j - this->getRadio(), j + this->getRadio() + 1));
+			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 255;
 		      }
 
@@ -133,18 +132,6 @@ namespace FSIV
 	  {
 	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
 	  }
-      }
-
-    /** Solo por error del programa **/
-    for(unsigned int j = this->getRadio(); j < static_cast<unsigned int>(imagen.cols) - this->getRadio() - 1; j++)
-      {
-	imagenFinal.at<unsigned char>(imagen.rows - this->getRadio() - 1, j) = imagen.at<unsigned char>(imagen.rows - this->getRadio() - 1, j);
-      }
-
-    /** Solo por error del programa **/
-    for(unsigned int i = this->getRadio(); i < static_cast<unsigned int>(imagen.rows) - this->getRadio(); i++)
-      {
-	imagenFinal.at<unsigned char>(i, imagenFinal.cols - this->getRadio() - 1) = imagen.at<unsigned char>(i, imagen.cols - this->getRadio() - 1);
       }
   }
 }
