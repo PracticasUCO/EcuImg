@@ -158,6 +158,7 @@ namespace FSIV
 		    ventana.release();
 		  }
 	      }
+	    this->rellenarBordes(canales[ILUMINACION], canalIluminacion);
 	    canales[ILUMINACION] = canalIluminacion.clone();
 	    merge(canales, matrizFinal);
 	  }
