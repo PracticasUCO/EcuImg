@@ -101,6 +101,10 @@ namespace FSIV
 			unsigned char valorLeido = imagen.at<unsigned char>(i, j);
 			matrizFinal.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
 		      }
+		    else
+		      {
+			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+		      }
 		  }
 	      }
 	  }
