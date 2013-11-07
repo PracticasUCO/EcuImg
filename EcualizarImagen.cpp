@@ -38,7 +38,6 @@ namespace FSIV
     assert((mascara.data == NULL) || (mascara.type() == imagen.type()));
 
     Mat matrizFinal(imagen.size(), imagen.type());
-    matrizFinal = matrizFinal.zeros(matrizFinal.size(), matrizFinal.type());
     static HistogramaAcumulado histograma;
 
     if(matrizFinal.channels() == 1) //Imagen monocroma
