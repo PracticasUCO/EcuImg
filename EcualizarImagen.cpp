@@ -44,17 +44,19 @@ namespace FSIV
       {
 	if(this->hayVentanas()) //Ecualizacion por ventanas
 	  {
-	    for(int i = this->getRadio(); i < matrizFinal.rows - static_cast<int>(this->getRadio()) - 1; i++)
+	    for(int i = this->getRadio(); i < imagen.rows - static_cast<int>(this->getRadio()) - 1; i++)
 	      {
-		for(int j = this->getRadio(); j < matrizFinal.cols - static_cast<int>(this->getRadio()) - 1; j++)
+		for(int j = this->getRadio(); j < imagen.cols - static_cast<int>(this->getRadio()) - 1; j++)
 		  {
-		    Mat ventana(imagen, Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
+		    Mat ventana(imagen, Range(i - this->getRadio(), i + this->getRadio() + 1), 
+				Range(j - this->getRadio(), j + this->getRadio() + 1));
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
 		    if(mascara.data != NULL)
 		      {
-			ventanaMascara = mascara(Rect(i, j, 2 * this->getRadio() + 1, 2 * this->getRadio() + 1));
+			ventanaMascara = imagen(Range(i - this->getRadio(), i + this->getRadio() + 1), 
+						Range(j - this->getRadio(), j + this->getRadio() + 1));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 255;
 		      }
 
@@ -131,6 +133,18 @@ namespace FSIV
 	  {
 	    imagenFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
 	  }
+      }
+
+    /** Solo por error del programa **/
+    for(unsigned int j = this->getRadio(); j < static_cast<unsigned int>(imagen.cols) - this->getRadio() - 1; j++)
+      {
+	imagenFinal.at<unsigned char>(imagen.rows - this->getRadio() - 1, j) = imagen.at<unsigned char>(imagen.rows - this->getRadio() - 1, j);
+      }
+
+    /** Solo por error del programa **/
+    for(unsigned int i = this->getRadio(); i < static_cast<unsigned int>(imagen.rows) - this->getRadio(); i++)
+      {
+	imagenFinal.at<unsigned char>(i, imagenFinal.cols - this->getRadio() - 1) = imagen.at<unsigned char>(i, imagen.cols - this->getRadio() - 1);
       }
   }
 }
