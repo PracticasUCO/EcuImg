@@ -15,9 +15,12 @@ namespace FSIV
   unsigned char EcualizarImagen::ecualizarPorVentana(const Mat &ventanaImagen, const Mat &ventanaMascara = cv::Mat())
   {
     HistogramaAcumulado histograma;
+    unsigned char centroVentana;
     
     histograma.procesarDatos(ventanaImagen, ventanaMascara);
     histograma.normalizar();
+
+    centroVentana = ventanaImagen.at<unsigned char>(this->getRadio() / 2, this->getRadio() / 2);
 
     return static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
   }
