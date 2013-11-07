@@ -101,7 +101,7 @@ int main(int argc, char ** argv)
     }
   else
     {
-      imagen = imread(opciones.imagenPath, CV_LOAD_IMAGE_GRAYSCALE);
+      imagen = imread(opciones.imagenPath, CV_LOAD_IMAGE_UNCHANGED);
     }
 
   if(opciones.mascaraFlag == true)
@@ -109,9 +109,9 @@ int main(int argc, char ** argv)
       mascara = imread(opciones.mascaraPath, CV_LOAD_IMAGE_UNCHANGED);
     }
 
-  EcualizarImagen claseEcualizar(mascara, imagen.size(), imagen.channels(), opciones.radioValue);
+  EcualizarImagen claseEcualizar(opciones.radioValue);
  
-  resultado = claseEcualizar.ecualizar(imagen);
+  resultado = claseEcualizar.ecualizar(imagen, mascara);
 
   parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
   parametrosSalida.push_back(9);

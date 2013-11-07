@@ -124,15 +124,15 @@ namespace FSIV
 	      {
 		for(int j = this->getRadio(); i < canales[ILUMINACION].cols - static_cast<int>(this->getRadio()); j++)
 		  {
-		    Mat ventana(canales[ILUMINACION], 
-				Rect(j - this->getRadio(), i - this->getRadio(), this->getRadio()*2 + 1, this->getRadio() * 2 + 1));
+		    int altura = (2*this->getRadio()) + 1;
+		    Mat ventana(canales[ILUMINACION], Rect(j - this->getRadio(), i - this->getRadio(), altura, altura));
 		    
 		    Mat ventanaMascara;
 		    bool permitirPaso = true;
 
 		    if(!mascara.empty())
 		      {
-			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
+			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), altura, altura));
 			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
