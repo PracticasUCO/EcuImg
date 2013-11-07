@@ -111,7 +111,58 @@ namespace FSIV
       }
     else
       {
-	cout << "Aun no implementada la ecualizacion cromatica" << endl;
+	Mat canalIluminacion(imagen.size(), CV_8UC1);
+	vector<Mat> canales;
+	const int ILUMINACION = 2;
+	
+	cvtColor(imagen, matrizFinal, CV_BGR2HSV);
+	split(matrizFinal, canales);
+
+	if(this->hayVentanas()) //Ecualizacion cromatica por ventanas
+	  {
+	    for(int i = this->getRadio(); i < canales[ILUMINACION].rows - static_cast<int>(this->getRadio()); i++)
+	      {
+		for(int j = this->getRadio(); i < canales[ILUMINACION].cols - static_cast<int>(this->getRadio()); j++)
+		  {
+		    Mat ventana(canales[ILUMINACION], 
+				Rect(j - this->getRadio(), i - this->getRadio(), this->getRadio()*2 + 1, this->getRadio() * 2 + 1));
+		    
+		    Mat ventanaMascara;
+		    bool permitirPaso = true;
+
+		    if(!mascara.empty())
+		      {
+			ventanaMascara = mascara(Rect(j - this->getRadio(), i - this->getRadio(), 2*this->getRadio() + 1, 2*this->getRadio() + 1));
+			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
+		      }
+
+		    if(permitirPaso)
+		      {
+			unsigned char centroVentana = canales[ILUMINACION].at<unsigned char>(i, j);
+			unsigned char nuevoValor;
+
+			histograma.clear();
+			histograma.procesarDatos(ventana, ventanaMascara);
+			histograma.normalizar();
+		    
+			nuevoValor = static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
+			
+			canalIluminacion.at<unsigned char>(i, j) = nuevoValor;
+		      }
+		    else //Si no procesa el pixel, que copie al menos su valor original a la matriz de salida
+		      {
+			canalIluminacion.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
+		      }
+		    ventana.release();
+		  }
+	      }
+	    canales[ILUMINACION] = canalIluminacion.clone();
+	    merge(canales, matrizFinal);
+	  }
+	else
+	  {
+	  }
+	cvtColor(matrizFinal, matrizFinal, CV_HSV2BGR);
       }
 
     return matrizFinal;
