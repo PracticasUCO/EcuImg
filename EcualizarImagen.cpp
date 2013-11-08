@@ -215,4 +215,25 @@ namespace FSIV
 												  histograma.getMaximo());
       }
   }
+
+  void EcualizarImagen::ecualizarImagen(Mat &imagen, const Mat &mascara)
+  {
+    HistogramaAcumulado histograma;
+
+    histograma.procesarDatos(imagen, mascara);
+    histograma.normalizar();
+
+    for(int i = 0; i < imagen.rows; i++)
+      {
+	for(int j = 0; j < imagen.cols; j++)
+	  {
+	    unsigned char valorLeido = imagen.at<unsigned char>(i, j);
+	    unsigned char nuevoValor;
+
+	    nuevoValor = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
+
+	    imagen.at<unsigned char>(i, j) = nuevoValor;
+	  }
+      }
+  }
 }
