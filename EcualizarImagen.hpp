@@ -22,7 +22,7 @@ namespace FSIV
 
     /** @brief Ecualiza el pixel central de la ventana, teniendo en cuenta todos los pixeles
 	de alrededor, siempre y cuando la mascara se lo permita **/
-    void ecualizarVentana(Mat &ventana, const Mat &mascara = cv::Mat());
+    void ecualizarVentana(const Mat &ventana, Mat &ventanaSalida, const Mat &mascara = cv::Mat());
 
     /** @brief Ecualiza la imagen entera **/
     void ecualizarImagen(Mat &imagen, const Mat &mascara = cv::Mat());

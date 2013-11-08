@@ -50,33 +50,16 @@ namespace FSIV
 		for(int j = radio; j < imagen.cols - radio; j++)
 		  {
 		    Mat ventana(imagen, Rect(j - radio, i - radio, radio * 2 + 1, radio * 2 + 1));
+		    Mat ventanaSalida(matrizFinal, Rect(j - radio, i - radio, 2 * radio + 1, 2 * radio + 1));
 		    Mat ventanaMascara;
-		    bool permitirPaso = true;
 
 		    if(!mascara.empty())
 		      {
 			ventanaMascara = mascara(Rect(j - radio, i - radio, 2 * radio + 1, 2 * radio + 1));
-			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
-		    if(permitirPaso)
-		      {
-			unsigned char centroVentana = imagen.at<unsigned char>(i, j);
-			unsigned char nuevoValor;
-
-			histograma.clear();
-			histograma.procesarDatos(ventana, ventanaMascara);
-			histograma.normalizar();
+		    this->ecualizarVentana(ventana, ventanaSalida, ventanaMascara);
 		    
-			nuevoValor = static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
-			
-			matrizFinal.at<unsigned char>(i, j) = nuevoValor;
-		      }
-		    else //Si no procesa el pixel, que copie al menos su valor original a la matriz de salida
-		      {
-			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
-		      }
-		    ventana.release();
 		  }
 	      }
 
@@ -112,8 +95,8 @@ namespace FSIV
       }
     else
       {
-	Mat canalIluminacion(imagen.size(), CV_8UC1);
-	vector<Mat> canales;
+	Mat canalIluminacion(imagen.size(), CV_8UC1); //!< Es donde se ira escribiendo la nueva iluminacion
+	vector<Mat> canales; //!< Contiene todos los canales de la imagen
 	const int ILUMINACION = 2;
 	
 	cvtColor(imagen, matrizFinal, CV_BGR2HSV);
@@ -128,34 +111,15 @@ namespace FSIV
 		  {
 		    int altura = (2 * radio) + 1;
 		    Mat ventana(canales[ILUMINACION], Rect(j - radio, i - radio, altura, altura));
-		    
+		    Mat ventanaSalida(canalIluminacion, Rect(j - radio, i - radio, altura, altura));
 		    Mat ventanaMascara;
-		    bool permitirPaso = true;
 
 		    if(!mascara.empty())
 		      {
 			ventanaMascara = mascara(Rect(j - radio, i - radio, altura, altura));
-			permitirPaso = mascara.at<unsigned char>(i, j) != 0;
 		      }
 
-		    if(permitirPaso)
-		      {
-			unsigned char centroVentana = canales[ILUMINACION].at<unsigned char>(i, j);
-			unsigned char nuevoValor;
-
-			histograma.clear();
-			histograma.procesarDatos(ventana, ventanaMascara);
-			histograma.normalizar();
-		    
-			nuevoValor = static_cast<unsigned char>(histograma[centroVentana] * histograma.getMaximo());
-			
-			canalIluminacion.at<unsigned char>(i, j) = nuevoValor;
-		      }
-		    else //Si no procesa el pixel, que copie al menos su valor original a la matriz de salida
-		      {
-			canalIluminacion.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
-		      }
-		    ventana.release();
+		    this->ecualizarVentana(ventana, ventanaSalida, ventanaMascara);
 		  }
 	      }
 	    this->rellenarBordes(canales[ILUMINACION], canalIluminacion);
@@ -227,7 +191,7 @@ namespace FSIV
       }
   }
 
-  void EcualizarImagen::ecualizarVentana(Mat &ventana, const Mat &mascara)
+  void EcualizarImagen::ecualizarVentana(const Mat &ventana, Mat &ventanaSalida, const Mat &mascara)
   {
     assert((mascara.empty()) || (ventana.size() == mascara.size()));
     assert((mascara.empty()) || (ventana.type() == mascara.type()));
@@ -247,7 +211,8 @@ namespace FSIV
     if((mascara.empty()) || (mascara.at<unsigned char>(filaCentral, columnaCentral) != 0))
       {
 	unsigned char valorCentral = ventana.at<unsigned char>(filaCentral, columnaCentral);
-	ventana.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * histograma.getMaximo());
+	ventanaSalida.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * 
+												  histograma.getMaximo());
       }
   }
 }
