@@ -20,6 +20,13 @@ namespace FSIV
     /** @brief Rellena los bordes de una imagen **/
     void rellenarBordes(const Mat &imagen, Mat &imagenFinal);
 
+    /** @brief Ecualiza el pixel central de la ventana, teniendo en cuenta todos los pixeles
+	de alrededor, siempre y cuando la mascara se lo permita **/
+    void ecualizarVentana(Mat &ventana, const Mat &mascara = cv::Mat());
+
+    /** @brief Ecualiza la imagen entera **/
+    void ecualizarImagen(Mat &imagen, const Mat &mascara = cv::Mat());
+
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
     EcualizarImagen(const unsigned int &radio = 0);
