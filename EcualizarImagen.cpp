@@ -226,4 +226,28 @@ namespace FSIV
 	  }
       }
   }
+
+  void EcualizarImagen::ecualizarVentana(Mat &ventana, const Mat &mascara)
+  {
+    assert((mascara.empty()) || (ventana.size() == mascara.size()));
+    assert((mascara.empty()) || (ventana.type() == mascara.type()));
+    assert(ventana.rows > 1);
+    assert(ventana.cols > 1);
+
+    HistogramaAcumulado histograma;
+    int filaCentral;
+    int columnaCentral;
+
+    histograma.procesarDatos(ventana, mascara);
+    histograma.normalizar();
+
+    filaCentral = ventana.rows / 2;
+    columnaCentral = ventana.cols / 2;
+
+    if((mascara.empty()) || (mascara.at<unsigned char>(filaCentral, columnaCentral) != 0))
+      {
+	unsigned char valorCentral = ventana.at<unsigned char>(filaCentral, columnaCentral);
+	ventana.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * histograma.getMaximo());
+      }
+  }
 }
