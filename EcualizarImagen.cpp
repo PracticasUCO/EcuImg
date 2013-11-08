@@ -37,8 +37,9 @@ namespace FSIV
     assert((mascara.data == NULL) || (mascara.size() == imagen.size()));
     assert((mascara.data == NULL) || (mascara.type() == imagen.type()));
 
-    Mat matrizFinal(imagen.size(), imagen.type());
-    static HistogramaAcumulado histograma;
+    Mat matrizFinal;
+
+    matrizFinal = imagen.clone();
 
     if(matrizFinal.channels() == 1) //Imagen monocroma
       {
@@ -72,25 +73,7 @@ namespace FSIV
 	  }
 	else
 	  {
-	    histograma.clear();
-	    histograma.procesarDatos(imagen, mascara);
-	    histograma.normalizar();
-	    
-	    for(int i = 0; i < matrizFinal.rows; i++)
-	      {
-		for(int j = 0; j < matrizFinal.cols; j++)
-		  {
-		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 0))
-		      {
-			unsigned char valorLeido = imagen.at<unsigned char>(i, j);
-			matrizFinal.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
-		      }
-		    else
-		      {
-			matrizFinal.at<unsigned char>(i, j) = imagen.at<unsigned char>(i, j);
-		      }
-		  }
-	      }
+	    this->ecualizarImagen(matrizFinal, mascara);
 	  }
       }
     else
@@ -128,26 +111,7 @@ namespace FSIV
 	  }
 	else
 	  {
-	    histograma.clear();
-	    histograma.procesarDatos(canales[ILUMINACION], mascara);
-	    histograma.normalizar();
-
-	    for(int i = 0; i < canalIluminacion.rows; i++)
-	      {
-		for(int j = 0; j < canalIluminacion.cols; j++)
-		  {
-		    if((mascara.empty()) || (mascara.at<unsigned char>(i, j) != 0))
-		      {
-			unsigned char valorLeido = canales[ILUMINACION].at<unsigned char>(i, j);
-			canalIluminacion.at<unsigned char>(i, j) = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
-		      }
-		    else
-		      {
-			canalIluminacion.at<unsigned char>(i, j) = canales[ILUMINACION].at<unsigned char>(i, j);
-		      }
-		  }
-	      }
-	    canales[ILUMINACION] = canalIluminacion.clone();
+	    this->ecualizarImagen(canales[ILUMINACION], mascara);
 	    merge(canales, matrizFinal);
 	  }
 	cvtColor(matrizFinal, matrizFinal, CV_HSV2BGR);
