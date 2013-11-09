@@ -218,10 +218,6 @@ namespace FSIV
       {
 	cvtColor(imagen, imagen, CV_BGR2HSV);
       }
-    else if(espacio == ESPACIO_COLOR_CIE)
-      {
-	cvtColor(imagen, imagen, CV_BGR2XYZ);
-      }
     else if(espacio == ESPACIO_COLOR_YCrCb)
       {
 	cvtColor(imagen, imagen, CV_BGR2YCrCb);
@@ -240,10 +236,6 @@ namespace FSIV
 	if(espacioBase == ESPACIO_COLOR_HSV)
 	  {
 	    cvtColor(imagen, imagen, CV_HSV2BGR);
-	  }
-	else if(espacioBase == ESPACIO_COLOR_CIE)
-	  {
-	    cvtColor(imagen, imagen, CV_XYZ2BGR);
 	  }
 	else if(espacioBase == ESPACIO_COLOR_YCrCb)
 	  {
@@ -264,10 +256,6 @@ namespace FSIV
     if((espacioBase == ESPACIO_COLOR_HSV) || (espacioBase == ESPACIO_COLOR_HSL))
       {
 	canalIluminancia = 2;
-      }
-    else if(espacioBase == ESPACIO_COLOR_CIE)
-      {
-	canalIluminancia = 1;
       }
     else
       {

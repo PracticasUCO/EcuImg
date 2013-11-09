@@ -71,10 +71,6 @@ int main(int argc, char ** argv)
 	    {
 	      opciones.espacio = ESPACIO_COLOR_HSV; 
 	    }
-	  else if(strstr(optarg, "CIE") != NULL)
-	    {
-	      opciones.espacio = ESPACIO_COLOR_CIE;
-	    }
 	  else if(strstr(optarg, "YCrCb") != NULL)
 	    {
 	      opciones.espacio = ESPACIO_COLOR_YCrCb;
@@ -88,7 +84,6 @@ int main(int argc, char ** argv)
 	      cerr << "Error en el parametro -e" << endl;
 	      cerr << "Debe de usarlo con uno de las siguientes opciones: " << endl;
 	      cerr << "HSV para hacer la conversion en el espacio de color HSV (por defecto)" << endl;
-	      cerr << "CIE para hacer la conversion en el espacio de color CIE" << endl;
 	      cerr << "YCrCb para hacer la conversion en el espacio de color YCrCb" << endl;
 	      cerr << "HSL para hacer la conversion en el espacio de color HSL" << endl;
 	      exit(1);
