@@ -18,6 +18,7 @@ namespace FSIV
   {
   private:
     unsigned int _radio; //!< Radio de la ventana que ecualizara la imagen
+    enum espacioColor _espacioColor; //!< Espacio de color en el que se hara la conversion de la imagen
 
     /** @brief Rellena los bordes de una imagen **/
     void rellenarBordes(const Mat &imagen, Mat &imagenFinal);
