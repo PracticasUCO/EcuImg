@@ -35,7 +35,7 @@ namespace FSIV
 
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
-    EcualizarImagen(const unsigned int &radio = 0);
+    EcualizarImagen(const unsigned int &radio = 0, const enum espacioColor &espacio = ESPACIO_COLOR_HSV);
 
     /** @brief Devuelve el radio asignado
 	@return Radio de la mascara. 

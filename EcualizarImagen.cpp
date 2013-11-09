@@ -12,9 +12,10 @@ using namespace std; //Debug
 
 namespace FSIV
 {
-  EcualizarImagen::EcualizarImagen(const unsigned int &radio)
+  EcualizarImagen::EcualizarImagen(const unsigned int &radio, const enum espacioColor &espacio)
   {
     this->setRadio(radio);
+    this->setEspacioColor(espacio);
   }
 
   unsigned int EcualizarImagen::getRadio() const
