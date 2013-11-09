@@ -212,4 +212,48 @@ namespace FSIV
 	  }
       }
   }
+
+  void cambiarEspacioColor(Mat &imagen, const enum espacioColor &espacio)
+  {
+    if(espacio == ESPACIO_COLOR_HSV)
+      {
+	cvtColor(imagen, imagen, CV_BGR2HSV);
+      }
+    else if(espacio == ESPACIO_COLOR_CIE)
+      {
+	cvtColor(imagen, imagen, CV_BGR2XYZ);
+      }
+    else if(espacio == ESPACIO_COLOR_YCrCb)
+      {
+	cvtColor(imagen, imagen, CV_BGR2YCrCb);
+      }
+    else if(espacio == ESPACIO_COLOR_HSL)
+      {
+	cvtColor(imagen, imagen, CV_BGR2HLS);
+      }
+    else //Se trata de restaurar la imagen
+      {
+	enum espacioColor espacioBase = this->getEspacioColor();
+	
+	//El espacioBase nunca valdra ESPACIO_COLOR_RGB puesto que
+	//el metodo EcualizarImagen::setEspacioColor no lo permite
+
+	if(espacioBase == ESPACIO_COLOR_HSV)
+	  {
+	    cvtColor(imagen, imagen, CV_HSV2BGR);
+	  }
+	else if(espacioBase == ESPACIO_COLOR_CIE)
+	  {
+	    cvtColor(imagen, imagen, CV_XYZ2BGR);
+	  }
+	else if(espacioBase == ESPACIO_COLOR_YCrCb)
+	  {
+	    cvtColor(imagen, imagen, CV_YCrCb2BGR);
+	  }
+	else
+	  {
+	    cvtColor(imagen, imagen, HLS2BGR);
+	  }
+      }
+  }
 }
