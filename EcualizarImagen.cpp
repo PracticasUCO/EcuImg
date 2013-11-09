@@ -256,4 +256,29 @@ namespace FSIV
 	  }
       }
   }
+
+  unsigned int EcualizarImagen::getIluminancia()
+  {
+    enum espacioColor espacioBase = this->getEspacioColor();
+    unsigned int canalIluminancia;
+
+    if(espacioBase == ESPACIO_COLOR_HSV)
+      {
+	canalIluminancia = 2;
+      }
+    else if(espacioBase == ESPACIO_COLOR_CIE)
+      {
+	canalIluminancia = 1;
+      }
+    else if(espacioBase == ESPACIO_COLOR_YCrCb)
+      {
+	canalIluminancia = 0;
+      }
+    else
+      {
+	canalIluminancia = 2;
+      }
+
+    return canalIluminancia;
+  }
 }
