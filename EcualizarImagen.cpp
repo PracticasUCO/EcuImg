@@ -212,7 +212,7 @@ namespace FSIV
       }
   }
 
-  void cambiarEspacioColor(Mat &imagen, const enum espacioColor &espacio)
+  void EcualizarImagen::cambiarEspacioColor(Mat &imagen, const enum espacioColor &espacio)
   {
     if(espacio == ESPACIO_COLOR_HSV)
       {
@@ -251,7 +251,7 @@ namespace FSIV
 	  }
 	else
 	  {
-	    cvtColor(imagen, imagen, HLS2BGR);
+	    cvtColor(imagen, imagen, CV_HLS2BGR);
 	  }
       }
   }
