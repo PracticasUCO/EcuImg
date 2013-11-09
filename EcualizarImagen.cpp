@@ -262,7 +262,7 @@ namespace FSIV
     enum espacioColor espacioBase = this->getEspacioColor();
     unsigned int canalIluminancia;
 
-    if(espacioBase == ESPACIO_COLOR_HSV)
+    if((espacioBase == ESPACIO_COLOR_HSV) || (espacioBase == ESPACIO_COLOR_HSL))
       {
 	canalIluminancia = 2;
       }
@@ -270,13 +270,9 @@ namespace FSIV
       {
 	canalIluminancia = 1;
       }
-    else if(espacioBase == ESPACIO_COLOR_YCrCb)
-      {
-	canalIluminancia = 0;
-      }
     else
       {
-	canalIluminancia = 2;
+	canalIluminancia = 0;
       }
 
     return canalIluminancia;
