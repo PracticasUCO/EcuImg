@@ -67,11 +67,11 @@ int main(int argc, char ** argv)
 	  break;
 
 	case 'e':
-	  if((strstr(optarg, "HSV") != NULL) || (strstr(optarg, "hsv") != NULL))
+	  if(strstr(optarg, "HSV") != NULL)
 	    {
-	      opciones.espacio = ESPACIO_COLOR_HSV;
+	      opciones.espacio = ESPACIO_COLOR_HSV; 
 	    }
-	  else if((strstr(optarg, "CIE") != NULL) || (strstr(optarg, "cie") != NULL))
+	  else if(strstr(optarg, "CIE") != NULL)
 	    {
 	      opciones.espacio = ESPACIO_COLOR_CIE;
 	    }
@@ -79,20 +79,21 @@ int main(int argc, char ** argv)
 	    {
 	      opciones.espacio = ESPACIO_COLOR_YCrCb;
 	    }
-	  else if((strstr(optarg, "HSL") != NULL) || (strstr(optarg, "hsl") != NULL))
+	  else if(strstr(optarg, "HSL") != NULL)
 	    {
 	      opciones.espacio = ESPACIO_COLOR_HSL;
 	    }
 	  else
 	    {
-	      cerr << "Error" << endl;
-	      cerr << "El parametro -e es incorrecto. Solo puede tomar los siguientes valores:" << endl;
-	      cerr << "HSV o hsv --> Para hacer la transformacion en el espacio de color HSV (por defecto)" << endl;
-	      cerr << "CIE o cie --> Para hacer la transformacion en el espacio de color CIE" << endl;
-	      cerr << "YCrCb --> Para hacer la transformación en el espacio de color YCrCb" << endl;
-	      cerr << "HSL --> Para hacer la transformacion en el espacio de color HSL" << endl;
+	      cerr << "Error en el parametro -e" << endl;
+	      cerr << "Debe de usarlo con uno de las siguientes opciones: " << endl;
+	      cerr << "HSV para hacer la conversion en el espacio de color HSV (por defecto)" << endl;
+	      cerr << "CIE para hacer la conversion en el espacio de color CIE" << endl;
+	      cerr << "YCrCb para hacer la conversion en el espacio de color YCrCb" << endl;
+	      cerr << "HSL para hacer la conversion en el espacio de color HSL" << endl;
 	      exit(1);
 	    }
+	  break;
 
 	case '?':
 	  if(optopt == 'r')
@@ -108,6 +109,11 @@ int main(int argc, char ** argv)
 	  else if(optopt == 'm')
 	    {
 	      cerr << "La opcion m requiere un parametro" << endl;
+	      exit(1);
+	    }
+	  else if(optopt == 'e')
+	    {
+	      cerr << "La opcion e requiere un parametro" << endl;
 	      exit(1);
 	    }
 	  else if(isprint(optopt))
