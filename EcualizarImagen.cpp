@@ -127,6 +127,11 @@ namespace FSIV
     _espacioColor = espacio;
   }
 
+  enum espacioColor EcualizarImagen::getEspacioColor()
+  {
+    return _espacioColor;
+  }
+
   void EcualizarImagen::rellenarBordes(const Mat &imagen, Mat &imagenFinal)
   {
     for(unsigned int i = 0; i < this->getRadio(); i++)
