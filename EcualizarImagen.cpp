@@ -121,6 +121,12 @@ namespace FSIV
     return matrizFinal;
   }
 
+  void EcualizarImagen::setEspacioColor(const enum espacioColor &espacio = ESPACIO_COLOR_HSV)
+  {
+    assert(espacio != ESPACIO_COLOR_RGB);
+    _espacioColor = espacio;
+  }
+
   void EcualizarImagen::rellenarBordes(const Mat &imagen, Mat &imagenFinal)
   {
     for(unsigned int i = 0; i < this->getRadio(); i++)

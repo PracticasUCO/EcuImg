@@ -63,6 +63,7 @@ namespace FSIV
 
     /** @brief Cambia el espacio de color en el que se haran las transformaciones de la imagen 
 	@param espacio Indica el espacio de color de la imagen
+	@pre No se puede especificar el espacio de color RGB, debido a que no se puede ecualizar con ese espacio
     **/
     void setEspacioColor(const enum espacioColor &espacio = ESPACIO_COLOR_HSV);
 
