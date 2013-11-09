@@ -33,6 +33,9 @@ namespace FSIV
     /** @brief Convierte la imagen al espacio de color especificado **/
     void cambiarEspacioColor(Mat &imagen, const enum espacioColor &espacio);
 
+    /** @brief Devuelve el indice del canal que tiene la iluminancia en cada espacio de color **/
+    unsigned int getIluminancia();
+
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
     EcualizarImagen(const unsigned int &radio = 0, const enum espacioColor &espacio = ESPACIO_COLOR_HSV);
