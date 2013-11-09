@@ -2,13 +2,11 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <cassert>
-#include <iostream> //Debug
 #include "EcualizarImagen.hpp"
 #include "Histograma.hpp"
 #include "HistogramaAcumulado.hpp"
 
 using namespace cv;
-using namespace std; //Debug
 
 namespace FSIV
 {
@@ -61,7 +59,7 @@ namespace FSIV
 		      }
 
 		    this->ecualizarVentana(ventana, ventanaSalida, ventanaMascara);
-		    
+
 		  }
 	      }
 
@@ -82,7 +80,7 @@ namespace FSIV
 	Mat canalIluminacion(imagen.size(), CV_8UC1); //!< Es donde se ira escribiendo la nueva iluminacion
 	vector<Mat> canales; //!< Contiene todos los canales de la imagen
 	const int ILUMINACION = this->getIluminancia();
-	
+
 	this->cambiarEspacioColor(matrizFinal, this->getEspacioColor());
 	split(matrizFinal, canales);
 
@@ -218,10 +216,6 @@ namespace FSIV
       {
 	cvtColor(imagen, imagen, CV_BGR2HSV);
       }
-    else if(espacio == ESPACIO_COLOR_YCrCb)
-      {
-	cvtColor(imagen, imagen, CV_BGR2YCrCb);
-      }
     else if(espacio == ESPACIO_COLOR_HSL)
       {
 	cvtColor(imagen, imagen, CV_BGR2HLS);
@@ -229,17 +223,13 @@ namespace FSIV
     else //Se trata de restaurar la imagen
       {
 	enum espacioColor espacioBase = this->getEspacioColor();
-	
+
 	//El espacioBase nunca valdra ESPACIO_COLOR_RGB puesto que
 	//el metodo EcualizarImagen::setEspacioColor no lo permite
 
 	if(espacioBase == ESPACIO_COLOR_HSV)
 	  {
 	    cvtColor(imagen, imagen, CV_HSV2BGR);
-	  }
-	else if(espacioBase == ESPACIO_COLOR_YCrCb)
-	  {
-	    cvtColor(imagen, imagen, CV_YCrCb2BGR);
 	  }
 	else
 	  {
@@ -250,17 +240,7 @@ namespace FSIV
 
   unsigned int EcualizarImagen::getIluminancia()
   {
-    enum espacioColor espacioBase = this->getEspacioColor();
-    unsigned int canalIluminancia;
-
-    if((espacioBase == ESPACIO_COLOR_HSV) || (espacioBase == ESPACIO_COLOR_HSL))
-      {
-	canalIluminancia = 2;
-      }
-    else
-      {
-	canalIluminancia = 0;
-      }
+    unsigned int canalIluminancia = 2;
 
     return canalIluminancia;
   }

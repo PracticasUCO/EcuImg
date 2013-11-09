@@ -11,7 +11,7 @@ using namespace cv;
 
 namespace FSIV
 {
-  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_YCrCb, ESPACIO_COLOR_HSL, ESPACIO_COLOR_RGB};
+  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_HSL, ESPACIO_COLOR_RGB};
 
   /** @brief Clase que realiza la ecualización de una imagen. **/
   class EcualizarImagen
@@ -38,7 +38,7 @@ namespace FSIV
 
   public:
     /** @brief Constructor vacio. Inicializa la imagen con los parametros en blanco.**/
-    EcualizarImagen(const unsigned int &radio = 0, const enum espacioColor &espacio = ESPACIO_COLOR_HSV);
+    EcualizarImagen(const unsigned int &radio = 0, const enum espacioColor &espacio = ESPACIO_COLOR_HSL);
 
     /** @brief Devuelve el radio asignado
 	@return Radio de la mascara. 
