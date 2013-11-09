@@ -11,7 +11,7 @@ using namespace cv;
 
 namespace FSIV
 {
-  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_CIE, ESPACIO_COLOR_YCrCb, ESPACIO_COLOR_HSL, ESPACIO_COLOR_RGB };
+  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_CIE, ESPACIO_COLOR_YCrCb, ESPACIO_COLOR_HSL};
 
   /** @brief Clase que realiza la ecualización de una imagen. **/
   class EcualizarImagen
@@ -55,7 +55,7 @@ namespace FSIV
 	@pre Si se inicializo una mascara, deben de coincidir
 	@return Una imagen ecualizada
     **/
-    Mat ecualizar(const Mat &imagen, const enum espacioColor &espacio = ESPACIO_COLOR_HSV, const Mat &mascara = cv::Mat());
+    Mat ecualizar(const Mat &imagen, const Mat &mascara = cv::Mat());
   };
 };
 

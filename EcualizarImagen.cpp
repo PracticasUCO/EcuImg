@@ -32,7 +32,7 @@ namespace FSIV
     return this->getRadio() != 0;
   }
 
-  Mat EcualizarImagen::ecualizar(const Mat &imagen, const enum espacioColor &espacio, const Mat &mascara)
+  Mat EcualizarImagen::ecualizar(const Mat &imagen, const Mat &mascara)
   {
     assert((mascara.data == NULL) || (mascara.size() == imagen.size()));
     assert((mascara.data == NULL) || (mascara.type() == imagen.type()));
