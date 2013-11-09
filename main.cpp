@@ -21,6 +21,7 @@ struct opcionesPrograma
     radioValue = 0;
     imagenPath = NULL;
     mascaraPath = NULL;
+    espacio = ESPACIO_COLOR_HSV;
   }
 
   bool radioFlag;
@@ -30,6 +31,8 @@ struct opcionesPrograma
   int radioValue;
   char * imagenPath;
   char * mascaraPath;
+
+  enum espacioColor espacio;
 };
 
 int main(int argc, char ** argv)
@@ -44,7 +47,7 @@ int main(int argc, char ** argv)
 
   int variable;
 
-  while((variable = getopt(argc, argv, "r:i:m:")) != -1)
+  while((variable = getopt(argc, argv, "r:i:m:e:")) != -1)
     {
       switch(variable)
 	{
@@ -62,6 +65,34 @@ int main(int argc, char ** argv)
 	  opciones.mascaraFlag = true;
 	  opciones.mascaraPath = optarg;
 	  break;
+
+	case 'e':
+	  if((strstr(optarg, "HSV") != NULL) || (strstr(optarg, "hsv") != NULL))
+	    {
+	      opciones.espacio = ESPACIO_COLOR_HSV;
+	    }
+	  else if((strstr(optarg, "CIE") != NULL) || (strstr(optarg, "cie") != NULL))
+	    {
+	      opciones.espacio = ESPACIO_COLOR_CIE;
+	    }
+	  else if(strstr(optarg, "YCrCb") != NULL)
+	    {
+	      opciones.espacio = ESPACIO_COLOR_YCrCb;
+	    }
+	  else if((strstr(optarg, "HSL") != NULL) || (strstr(optarg, "hsl") != NULL))
+	    {
+	      opciones.espacio = ESPACIO_COLOR_HSL;
+	    }
+	  else
+	    {
+	      cerr << "Error" << endl;
+	      cerr << "El parametro -e es incorrecto. Solo puede tomar los siguientes valores:" << endl;
+	      cerr << "HSV o hsv --> Para hacer la transformacion en el espacio de color HSV (por defecto)" << endl;
+	      cerr << "CIE o cie --> Para hacer la transformacion en el espacio de color CIE" << endl;
+	      cerr << "YCrCb --> Para hacer la transformación en el espacio de color YCrCb" << endl;
+	      cerr << "HSL --> Para hacer la transformacion en el espacio de color HSL" << endl;
+	      exit(1);
+	    }
 
 	case '?':
 	  if(optopt == 'r')
@@ -109,7 +140,7 @@ int main(int argc, char ** argv)
       mascara = imread(opciones.mascaraPath, CV_LOAD_IMAGE_UNCHANGED);
     }
 
-  EcualizarImagen claseEcualizar(opciones.radioValue);
+  EcualizarImagen claseEcualizar(opciones.radioValue, opciones.espacio);
  
   resultado = claseEcualizar.ecualizar(imagen, mascara);
 
