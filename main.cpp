@@ -21,7 +21,7 @@ struct opcionesPrograma
     radioValue = 0;
     imagenPath = NULL;
     mascaraPath = NULL;
-    espacio = ESPACIO_COLOR_HSV;
+    espacio = ESPACIO_COLOR_HSL;
   }
 
   bool radioFlag;
