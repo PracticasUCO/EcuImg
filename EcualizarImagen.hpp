@@ -11,7 +11,7 @@ using namespace cv;
 
 namespace FSIV
 {
-  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_CIE };
+  enum espacioColor { ESPACIO_COLOR_HSV, ESPACIO_COLOR_CIE, ESPACIO_COLOR_YCrCb };
 
   /** @brief Clase que realiza la ecualización de una imagen. **/
   class EcualizarImagen
