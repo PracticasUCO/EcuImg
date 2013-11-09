@@ -81,9 +81,9 @@ namespace FSIV
       {
 	Mat canalIluminacion(imagen.size(), CV_8UC1); //!< Es donde se ira escribiendo la nueva iluminacion
 	vector<Mat> canales; //!< Contiene todos los canales de la imagen
-	const int ILUMINACION = 2;
+	const int ILUMINACION = this->getIluminancia();
 	
-	cvtColor(imagen, matrizFinal, CV_BGR2HSV);
+	this->cambiarEspacioColor(matrizFinal, this->getEspacioColor());
 	split(matrizFinal, canales);
 
 	if(this->hayVentanas()) //Ecualizacion cromatica por ventanas
@@ -108,20 +108,19 @@ namespace FSIV
 	      }
 	    this->rellenarBordes(canales[ILUMINACION], canalIluminacion);
 	    canales[ILUMINACION] = canalIluminacion.clone();
-	    merge(canales, matrizFinal);
 	  }
 	else
 	  {
 	    this->ecualizarImagen(canales[ILUMINACION], mascara);
-	    merge(canales, matrizFinal);
 	  }
-	cvtColor(matrizFinal, matrizFinal, CV_HSV2BGR);
+	merge(canales, matrizFinal);
+	this->cambiarEspacioColor(matrizFinal, ESPACIO_COLOR_RGB);
       }
 
     return matrizFinal;
   }
 
-  void EcualizarImagen::setEspacioColor(const enum espacioColor &espacio = ESPACIO_COLOR_HSV)
+  void EcualizarImagen::setEspacioColor(const enum espacioColor &espacio)
   {
     assert(espacio != ESPACIO_COLOR_RGB);
     _espacioColor = espacio;
