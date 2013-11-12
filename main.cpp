@@ -19,6 +19,7 @@ struct opcionesPrograma
     imagenFlag = false;
     mascaraFlag = false;
     showPicture = false;
+    biecualizar = false;
     save = false;
     radioValue = 0;
     imagenPath = NULL;
@@ -31,6 +32,7 @@ struct opcionesPrograma
   bool mascaraFlag;
   bool showPicture;
   bool save;
+  bool biecualizar;
 
   int radioValue;
   char * imagenPath;
@@ -51,7 +53,7 @@ int main(int argc, char ** argv)
 
   int variable;
 
-  while((variable = getopt(argc, argv, "r:s:m:e:is")) != -1)
+  while((variable = getopt(argc, argv, "r:s:m:e:isb")) != -1)
     {
       switch(variable)
 	{
@@ -68,6 +70,10 @@ int main(int argc, char ** argv)
 	case 'm':
 	  opciones.mascaraFlag = true;
 	  opciones.mascaraPath = optarg;
+	  break;
+
+	case 'b':
+	  opciones.biecualizar = true;
 	  break;
 
 	case 'e':
@@ -155,6 +161,8 @@ int main(int argc, char ** argv)
     }
 
   EcualizarImagen claseEcualizar(opciones.radioValue, opciones.espacio);
+  
+  claseEcualizar.setBiecualizacion(opciones.biecualizar);
  
   resultado = claseEcualizar.ecualizar(imagen, mascara);
 
