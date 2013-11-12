@@ -16,6 +16,7 @@ namespace FSIV
   {
     this->setRadio(radio);
     this->setEspacioColor(espacio);
+    this->setBiecualizacion(false);
   }
 
   unsigned int EcualizarImagen::getRadio() const
