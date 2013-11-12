@@ -277,4 +277,9 @@ namespace FSIV
 
     return canalIluminancia;
   }
+
+  void EcualizarImagen::setBiecualizacion(const bool &biecualizacion)
+  {
+    _biecualizacion = biecualizacion;
+  }
 }
