@@ -33,6 +33,7 @@ namespace FSIV
 
   unsigned int HistogramaAcumulado::buscarValor(const double &v)
   {
+    assert((v >= 0.0) && (v <= 1.0));
     for(unsigned int i = 0; i < this->getTamanio(); i++)
       {
 	if(this->getElemento(i) >= v)
