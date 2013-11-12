@@ -267,7 +267,7 @@ namespace FSIV
       }
     else if(espacioBase == ESPACIO_COLOR_CIE)
       {
-	canalIluminancia = 1;
+	canalIluminancia = 2;
       }
     else
       {
