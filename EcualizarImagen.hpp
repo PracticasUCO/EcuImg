@@ -74,6 +74,9 @@ namespace FSIV
 
     /**@brief Activa o desactiva la biecualizacion de la clase **/
     void setBiecualizacion(const bool &biecualizacion);
+
+    /** @brief Devuelve si la clase esta configurada o no para la biecualizacion **/
+    bool getBiecualizacion() const;
   };
 };
 

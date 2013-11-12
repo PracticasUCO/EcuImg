@@ -195,9 +195,15 @@ namespace FSIV
   void EcualizarImagen::ecualizarImagen(Mat &imagen, const Mat &mascara)
   {
     HistogramaAcumulado histograma;
+    int valorProhibido = 0; // Solo si la clase esta en modo biecualizacion
 
     histograma.procesarDatos(imagen, mascara);
     histograma.normalizar();
+
+    if(this->getBiecualizacion())
+      {
+	valorProhibido = histograma.buscarValor(0.5);
+      }
 
     for(int i = 0; i < imagen.rows; i++)
       {
@@ -206,9 +212,12 @@ namespace FSIV
 	    unsigned char valorLeido = imagen.at<unsigned char>(i, j);
 	    unsigned char nuevoValor;
 
-	    nuevoValor = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
+	    if((this->getBiecualizacion()) && (static_cast<int>(valorLeido) != valorProhibido))
+	      {
+		nuevoValor = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
 
-	    imagen.at<unsigned char>(i, j) = nuevoValor;
+		imagen.at<unsigned char>(i, j) = nuevoValor;
+	      }
 	  }
       }
   }
@@ -281,5 +290,10 @@ namespace FSIV
   void EcualizarImagen::setBiecualizacion(const bool &biecualizacion)
   {
     _biecualizacion = biecualizacion;
+  }
+
+  bool EcualizarImagen::getBiecualizacion() const
+  {
+    return _biecualizacion;
   }
 }
