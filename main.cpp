@@ -120,9 +120,9 @@ int main(int argc, char ** argv)
 	      cerr << "La opcion r requiere un parametro entero" << endl;
 	      exit(1);
 	    }
-	  else if(optopt == 'i')
+	  else if(optopt == 's')
 	    {
-	      cerr << "La opcion i requiere un parametro" << endl;
+	      cerr << "La opcion s requiere un parametro" << endl;
 	      exit(1);
 	    }
 	  else if(optopt == 'm')
@@ -133,6 +133,11 @@ int main(int argc, char ** argv)
 	  else if(optopt == 'e')
 	    {
 	      cerr << "La opcion e requiere un parametro" << endl;
+	      exit(1);
+	    }
+	  else if(optopt == 'o')
+	    {
+	      cerr << "La opcion o requiere un parametro" << endl;
 	      exit(1);
 	    }
 	  else if(isprint(optopt))
