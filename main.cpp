@@ -155,6 +155,12 @@ int main(int argc, char ** argv)
       imagen = imread(opciones.imagenPath, CV_LOAD_IMAGE_UNCHANGED);
     }
 
+  if((opciones.biecualizar == true) && (opciones.radioFlag == true))
+    {
+      cerr << "Los parametros -b y -r son incompatibles" << endl;
+      exit(1);
+    }
+
   if(opciones.mascaraFlag == true)
     {
       mascara = imread(opciones.mascaraPath, CV_LOAD_IMAGE_UNCHANGED);
