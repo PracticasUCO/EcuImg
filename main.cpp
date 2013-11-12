@@ -158,8 +158,12 @@ int main(int argc, char ** argv)
 
   if(opciones.showPicture == true)
     {
+      cvStartWindowThread();
+      cvNamedWindow("Imagen ecualizada", WINDOW_NORMAL);
       imshow("Imagen ecualizada", resultado);
-      waitKey();
+      cvResizeWindow("Imagen ecualizada", 400, 400);
+      cvWaitKey(0);
+      cvDestroyWindow("Imagen ecualizada");
     }
 
   parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
