@@ -3,8 +3,7 @@
 CXX = g++
 INCLUDE = -I.
 OPENCV = `pkg-config --cflags --libs opencv`
-GTK_FLAGS = `pkg-config --cflags --libs gtk+-3.0`
-CXXFLAGS = $(INCLUDE) -Wall -O3 -std=c++11 -lm $(OPENCV) $(GTK_FLAGS)
+CXXFLAGS = $(INCLUDE) -Wall -O3 -std=c++11 -lm $(OPENCV)
 
 ecuImg: EcualizarImagen.o HistogramaAcumulado.o Histograma.o main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -20,9 +19,6 @@ Histograma.o: Histograma.cpp Histograma.hpp
 
 main.o: main.cpp EcualizarImagen.o Histograma.o HistogramaAcumulado.o
 	$(CXX) $(CXXFLAGS) -c -o $@ main.cpp
-
-gui.o: gui.c gui.h
-	$(CXX) $(CXXFLAGS) -c -o $@ gui.c
 
 clean-objects:
 	-rm *.o
