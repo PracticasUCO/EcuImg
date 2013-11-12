@@ -160,6 +160,17 @@ int main(int argc, char ** argv)
 
   if(opciones.showPicture == true)
     {
+      int ancho = resultado.rows;
+      int alto = resultado.cols;
+      double ratio = static_cast<double>(ancho)/static_cast<double>(alto);
+
+      while(ancho >= 800)
+	{
+	  ancho /= 2;
+	}
+
+      alto = static_cast<int>(ratio * ancho);
+
       cvStartWindowThread();
       cvNamedWindow("Imagen ecualizada", WINDOW_NORMAL);
       cvNamedWindow("Imagen original", WINDOW_NORMAL);
@@ -167,8 +178,8 @@ int main(int argc, char ** argv)
       imshow("Imagen ecualizada", resultado);
       imshow("Imagen original", imagen);
 
-      cvResizeWindow("Imagen ecualizada", 400, 400);
-      cvResizeWindow("Imagen original", 400, 400);
+      cvResizeWindow("Imagen ecualizada", ancho, alto);
+      cvResizeWindow("Imagen original", ancho, alto);
 
       cvWaitKey(0);
 
