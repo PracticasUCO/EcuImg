@@ -18,6 +18,7 @@ struct opcionesPrograma
     radioFlag = false;
     imagenFlag = false;
     mascaraFlag = false;
+    showPicture = false;
     radioValue = 0;
     imagenPath = NULL;
     mascaraPath = NULL;
@@ -27,6 +28,7 @@ struct opcionesPrograma
   bool radioFlag;
   bool imagenFlag;
   bool mascaraFlag;
+  bool showPicture;
 
   int radioValue;
   char * imagenPath;
@@ -47,7 +49,7 @@ int main(int argc, char ** argv)
 
   int variable;
 
-  while((variable = getopt(argc, argv, "r:i:m:e:")) != -1)
+  while((variable = getopt(argc, argv, "r:s:m:e:i")) != -1)
     {
       switch(variable)
 	{
@@ -56,7 +58,7 @@ int main(int argc, char ** argv)
 	  opciones.radioValue = atoi(optarg);
 	  break;
 
-	case 'i':
+	case 's':
 	  opciones.imagenFlag = true;
 	  opciones.imagenPath = optarg;
 	  break;
@@ -93,6 +95,10 @@ int main(int argc, char ** argv)
 	      cerr << "HSL para hacer la conversion en el espacio de color HSL" << endl;
 	      exit(1);
 	    }
+	  break;
+
+	case 'i':
+	  opciones.showPicture = true;
 	  break;
 
 	case '?':
@@ -133,7 +139,7 @@ int main(int argc, char ** argv)
   if(opciones.imagenFlag == false)
     {
       cerr << "Es obligatorio especificar el path de la imagen" << endl;
-      cerr << "Use -i <path> " << endl;
+      cerr << "Use -s <path> " << endl;
       exit(1);
     }
   else
@@ -149,6 +155,12 @@ int main(int argc, char ** argv)
   EcualizarImagen claseEcualizar(opciones.radioValue, opciones.espacio);
  
   resultado = claseEcualizar.ecualizar(imagen, mascara);
+
+  if(opciones.showPicture == true)
+    {
+      imshow("Imagen ecualizada", resultado);
+      waitKey();
+    }
 
   parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
   parametrosSalida.push_back(9);
