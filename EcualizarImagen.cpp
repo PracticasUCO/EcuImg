@@ -182,7 +182,7 @@ namespace FSIV
     histograma.procesarDatos(ventana, mascara);
     histograma.normalizar();
 
-    if(this->getBiecualizar())
+    if(this->getBiecualizacion())
       {
 	valorProhibido = histograma.buscarValor(0.5);
       }
@@ -194,7 +194,7 @@ namespace FSIV
       {
 	unsigned char valorCentral = ventana.at<unsigned char>(filaCentral, columnaCentral);
 	
-	if((!this->getBiecualizar()) || (valorCentral != valorProhibido))
+	if((!this->getBiecualizacion()) || (valorCentral != valorProhibido))
 	  {
 	    ventanaSalida.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * 
 												  histograma.getMaximo());
