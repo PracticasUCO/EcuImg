@@ -19,6 +19,7 @@ namespace FSIV
   private:
     unsigned int _radio; //!< Radio de la ventana que ecualizara la imagen
     enum espacioColor _espacioColor; //!< Espacio de color en el que se hara la conversion de la imagen
+    bool _biecualizacion; //!< Activa o desactiva la biecualizacion
 
     /** @brief Rellena los bordes de una imagen **/
     void rellenarBordes(const Mat &imagen, Mat &imagenFinal);
@@ -70,6 +71,9 @@ namespace FSIV
     /** @brief Devuelve el espacio de color en el que se haran las transformaciones de la imagen
 	@return enum espacioColor **/
     enum espacioColor getEspacioColor();
+
+    /**@brief Activa o desactiva la biecualizacion de la clase **/
+    void setBiecualizacion(const bool &biecualizacion);
   };
 };
 
