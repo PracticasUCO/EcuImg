@@ -177,9 +177,15 @@ namespace FSIV
     HistogramaAcumulado histograma;
     int filaCentral;
     int columnaCentral;
+    int valorProhibido = 0; // Solo si la imagen esta en modo biecualizar
 
     histograma.procesarDatos(ventana, mascara);
     histograma.normalizar();
+
+    if(this->getBiecualizar())
+      {
+	valorProhibido = histograma.buscarValor(0.5);
+      }
 
     filaCentral = ventana.rows / 2;
     columnaCentral = ventana.cols / 2;
@@ -187,8 +193,12 @@ namespace FSIV
     if((mascara.empty()) || (mascara.at<unsigned char>(filaCentral, columnaCentral) != 0))
       {
 	unsigned char valorCentral = ventana.at<unsigned char>(filaCentral, columnaCentral);
-	ventanaSalida.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * 
+	
+	if((!this->getBiecualizar()) || (valorCentral != valorProhibido))
+	  {
+	    ventanaSalida.at<unsigned char>(filaCentral, columnaCentral) = static_cast<unsigned char>(histograma[valorCentral] * 
 												  histograma.getMaximo());
+	  }
       }
   }
 
@@ -212,7 +222,7 @@ namespace FSIV
 	    unsigned char valorLeido = imagen.at<unsigned char>(i, j);
 	    unsigned char nuevoValor;
 
-	    if((this->getBiecualizacion()) && (static_cast<int>(valorLeido) != valorProhibido))
+	    if((!this->getBiecualizacion()) || (static_cast<int>(valorLeido) != valorProhibido))
 	      {
 		nuevoValor = static_cast<unsigned char>(histograma[valorLeido] * histograma.getMaximo());
 
