@@ -19,6 +19,7 @@ struct opcionesPrograma
     imagenFlag = false;
     mascaraFlag = false;
     showPicture = false;
+    save = false;
     radioValue = 0;
     imagenPath = NULL;
     mascaraPath = NULL;
@@ -29,6 +30,7 @@ struct opcionesPrograma
   bool imagenFlag;
   bool mascaraFlag;
   bool showPicture;
+  bool save;
 
   int radioValue;
   char * imagenPath;
@@ -49,7 +51,7 @@ int main(int argc, char ** argv)
 
   int variable;
 
-  while((variable = getopt(argc, argv, "r:s:m:e:i")) != -1)
+  while((variable = getopt(argc, argv, "r:s:m:e:is")) != -1)
     {
       switch(variable)
 	{
@@ -160,20 +162,31 @@ int main(int argc, char ** argv)
     {
       cvStartWindowThread();
       cvNamedWindow("Imagen ecualizada", WINDOW_NORMAL);
+      cvNamedWindow("Imagen original", WINDOW_NORMAL);
+
       imshow("Imagen ecualizada", resultado);
+      imshow("Imagen original", imagen);
+
       cvResizeWindow("Imagen ecualizada", 400, 400);
+      cvResizeWindow("Imagen original", 400, 400);
+
       cvWaitKey(0);
+
       cvDestroyWindow("Imagen ecualizada");
+      cvDestroyWindow("Imagen original");
     }
 
-  parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
-  parametrosSalida.push_back(9);
+  if(opciones.save == true)
+    {
+      parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
+      parametrosSalida.push_back(9);
 
-  cout << "Fichero salida: ";
-  cin >> ficheroSalida;
-  cout << endl;
+      cout << "Fichero salida: ";
+      cin >> ficheroSalida;
+      cout << endl;
   
-  imwrite(ficheroSalida, resultado, parametrosSalida);
+      imwrite(ficheroSalida, resultado, parametrosSalida);
+    }
 
   return 0;
 }
