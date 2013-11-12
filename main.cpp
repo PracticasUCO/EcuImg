@@ -38,6 +38,8 @@ struct opcionesPrograma
   char * imagenPath;
   char * mascaraPath;
 
+  string output;
+
   enum espacioColor espacio;
 };
 
@@ -48,12 +50,11 @@ int main(int argc, char ** argv)
   Mat mascara;
   Mat resultado;
 
-  string ficheroSalida;
   vector<int> parametrosSalida;
 
   int variable;
 
-  while((variable = getopt(argc, argv, "r:s:m:e:isb")) != -1)
+  while((variable = getopt(argc, argv, "r:s:m:e:io:b")) != -1)
     {
       switch(variable)
 	{
@@ -66,6 +67,10 @@ int main(int argc, char ** argv)
 	  opciones.imagenFlag = true;
 	  opciones.imagenPath = optarg;
 	  break;
+	  
+	case 'o':
+	  opciones.save = true;
+	  opciones.output = optarg;
 
 	case 'm':
 	  opciones.mascaraFlag = true;
@@ -205,12 +210,8 @@ int main(int argc, char ** argv)
     {
       parametrosSalida.push_back(CV_IMWRITE_PNG_COMPRESSION);
       parametrosSalida.push_back(9);
-
-      cout << "Fichero salida: ";
-      cin >> ficheroSalida;
-      cout << endl;
   
-      imwrite(ficheroSalida, resultado, parametrosSalida);
+      imwrite(opciones.output, resultado, parametrosSalida);
     }
 
   return 0;
