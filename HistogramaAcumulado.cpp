@@ -43,4 +43,19 @@ namespace FSIV
       }
     return this->getMaximo();
   }
+
+  void HistogramaAcumulado::binormalizar()
+  {
+    unsigned int valorCentral = this->buscarValor(0.5);
+
+    for(unsigned int i = 0; i <= valorCentral; i++)
+      {
+	_histograma[i] = _histograma[i]/valorCentral;
+      }
+
+    for(unsigned int i = valorCentral + 1; i < _histograma.size(); i++)
+      {
+	_histograma[i] = (_histograma[i] - valorCentral) / (_histograma[_histograma.size() - 1] - valorCentral);
+      }
+  }
 };

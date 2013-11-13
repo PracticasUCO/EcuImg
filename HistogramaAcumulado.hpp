@@ -32,6 +32,8 @@ namespace FSIV
     /** @brief Normaliza el histograma **/
     void normalizar();
 
+    void binormalizar();
+
     inline ~HistogramaAcumulado()
     {
     }
